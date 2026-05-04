@@ -1,3 +1,28 @@
+server:
+  port: 8082
+  shutdown: graceful
+  netty:
+    connection-timeout: 2s
+    idle-timeout: 15s
+
 spring:
   application:
     name: book-cloudnative-orders
+
+  r2dbc:
+    name: cloudnative
+    username: root
+    password: root
+    url: r2dbc:mariadb://localhost:3306/cloudnative
+
+  config:
+    import: "optional:configserver:"
+  cloud:
+    config:
+      uri: http://localhost:8080
+      request-connect-timeout: 5000
+      request-read-timeout: 5000
+      fail-fast: false
+
+polar:
+  catalog-service-uri: "http://localhost:8081"
